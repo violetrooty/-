@@ -1,0 +1,74 @@
+ create table student(
+    sno char(7) primary key,
+    sname varchar(20) not null,
+    ssex char(2) check(ssex='男' or ssex='女'),
+    sage tinyint check(sage>=15 and sage<=45),
+    sdept varchar(20) default '计算机系'
+    );
+
+insert into student(sno,sname,ssex,sage) values('7412583','刘人','女','22');
+insert into student(sno,sname,ssex,sage) values('7412583','张大哦','男','23');
+insert into student(sno,sname,ssex,sage) values('7412521','张大er','男','22');
+insert into student(sno,sname,ssex,sage) values('1741222','李四','女','21');
+insert into student(sno,sname,ssex,sage) values('7412523','张咯','女','25');
+insert into student(sno,sname,ssex,sage) values('1741224','张六','男','26');
+insert into student(sno,sname,ssex,sage) values('7412583','杨小和','男','24');
+insert into student(sno,sname,ssex,sage) values('7412583','亏大了','男','22');
+insert into student(sno,sname,ssex,sage,sdept) values('7412583','刘大强','女','18','信息系');
+insert into student(sno,sname,ssex,sage,sdept) values('7412512','看看','女','21','数学系');
+insert into student(sno,sname,ssex,sage,sdept) values('1412513','解大决','男','20','信息系');
+insert into student(sno,sname,ssex,sage,sdept) values('7412514','破小发','女','18','数学系');
+insert into student(sno,sname,ssex,sage,sdept) values('7412515','规格','男','36','信息系');
+insert into student(sno,sname,ssex,sage,sdept) values('7412519','方法','男','36','数学系');
+
+
+
+create table course(
+     cno char(10) primary key,
+     cname char(20) not null,
+     ccredit tinyint check(ccredit>0),
+     semester tinyint check(semester>0),
+     period tinyint
+     );
+
+
+insert into course values('c01','数据库原理','3','4','64');
+insert into course values('c02','Java','4','2','45');
+insert into course values('c03','英语','5','2','56');
+insert into course values('c04','数学','6','3','45');
+insert into course values('c05','历史','7','2','50');
+insert into course values('c06','语文','8','2','45');
+insert into course values('c07','音乐','9','4','45');
+insert into course values('c08','体育','10','4','45');
+insert into course values('c09','心里','11','4','64');
+insert into course values('c10','思政','12','4','64');
+
+create table sc(
+	sno char(7),
+	cno char(10),
+	foreign key(sno) references student(sno),
+	foreign key(cno) references course(cno),
+	grade tinyint check(grade>=0 and grade<=100)
+	);
+
+insert into sc values('1234568','c07','33');
+insert into sc values('1234568','c02','90');
+insert into sc values('1234568','c03','56');
+insert into sc values('1234568','c04','90');
+insert into sc values('1234568','c05','90');
+insert into sc values('1234568','c06','90');
+insert into sc values('1234568','c07','90');
+insert into sc values('1234568','c08','90');
+insert into sc values('1234568','c09','90');
+
+
+
+7   select sno,sname from student;
+8   select *from student where sdept='计算机系';
+9   select sname ,sage from student where sage<=20;
+10  select sname,sdept,sage from student where sage>=20 and sage<=23;
+11  select sname,ssex,sdept from student where sdept='数学系' or sdept ='信息系' or sdept ='计算机系';
+12  select *from student where sname like '%张%';
+13  select *from student where sname like '%张%' or sname like '%李%' or sname like '%刘%';
+14  select *from student where sname like '_大_' or sname like '_小_';
+
