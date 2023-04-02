@@ -1,0 +1,25 @@
+package servlets;
+import java.io.*;
+import javax.servlet. *;
+import javax.servlet.http.*;
+import javax.servlet. annotation.WebServlet;
+@WebServlet("/ShopServlet") 
+public class ShopServlet extends HttpServlet{
+
+public void doGet(HttpServletReguest request, HttpServletResponse response) throwsServletException，IOException{
+response.setContentType("text/html;charset=UTF-8");
+HttpSession session=request.getSession();
+String username=(String)session.getAttribute("username")；
+PrintWriter out=response.getWriter();
+out.println(username+”欢迎您，请挑选物品放入购物车！＜br＞")；
+out.println("<form action=\"AddServlet\" method=\"post\"＞"
++"<inputtype=\"checkbox\"name=\"goods\"value=\"电话\">电话"
+十"<input type=\"checkbox\"name=\"goods\"value=\"电视\">电视"
++"<inputtype=\"checkbox\"name=\"goods\"value=\"微波炉\“>微波炉"
++"<input type=\"checkbox\"name=\"goods\"value=\"冰箱\">冰箱"
++"<input type=\"checkbox\"name=\"goods\"value=\"洗衣机\">洗衣机"
++"<input type=\"submit\"value=\"放入购物车\"＞"
++"＜/form＞")；
+public void doPost(HttpServletRequest request, HttpServletResponse response) throwsServletException，IOException{
+doGet(request,response);
+}}
